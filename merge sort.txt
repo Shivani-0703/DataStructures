@@ -1,0 +1,58 @@
+//merge sort
+#include<stdio.h>
+int merge(int a[],int l,int m,int h){
+    int n1=m-l+1;
+    int n2=h-m;
+    int B[100],C[100];
+    for(int i=0;i<n1;i++){
+        B[i]=a[l+i];
+    }
+    for (int j=0;j<n2;j++){
+        C[j]=a[m+1+j];
+    }
+    int i=0,j=0,k=l;
+
+
+    while(i<n1 && j<n2){
+        if(B[i]<=C[j]){
+            a[k]=B[i];
+            i++;
+            k++;
+        }
+        else{
+            a[k]=C[j];
+            j++;
+            k++;
+        }
+    
+    }
+    while(i<n1){
+        a[k]=B[i];
+        i++;
+        k++;
+    }
+    while(j<n2){
+        a[k]=C[j];
+        j++;
+        k++;
+    }
+}
+int mergesort(int a[],int l,int h){
+    int m;
+    if(l<h){
+     m=(l+h)/2;
+     mergesort(a,l,m);
+     mergesort(a,m+1,h);
+
+     merge(a,l,m,h);
+    }
+}
+int main(){
+    int a[]={87,56,45,31,20},n=5;
+    mergesort(a,0,n-1);
+    int i;
+    for(i=0;i<n;i++){
+        printf(" %d",a[i]);
+    }
+    
+}
